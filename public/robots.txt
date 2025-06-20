@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://checklyzer.sade.works/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1 
