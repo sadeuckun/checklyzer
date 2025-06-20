@@ -5,10 +5,10 @@ import { getBrandName } from '../../lib/getBrandName';
 export default function Header() {
   const brandName = getBrandName();
   return (
-    <header className="w-full flex items-center justify-between px-6 py-4 bg-white shadow-md">
-      <div className="flex items-center space-x-3">
-        <Link href="/" className="flex items-center space-x-2 text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors">
-          <svg className="w-8 h-8 text-blue-600" viewBox="0 0 32 32" fill="currentColor">
+    <header className="sticky top-0 z-50 w-full flex items-center justify-between px-4 md:px-6 py-3 md:py-4 bg-white shadow-md">
+      <div className="flex items-center space-x-2 md:space-x-3">
+        <Link href="/" className="flex items-center space-x-2 text-lg md:text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors">
+          <svg className="w-6 h-6 md:w-8 md:h-8 text-blue-600" viewBox="0 0 32 32" fill="currentColor">
             <defs>
               <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" style={{stopColor: '#2563eb', stopOpacity: 1}} />
@@ -31,7 +31,7 @@ export default function Header() {
           Tüm Araçlar
         </Link>
         <Link href="https://furkansadeuckun.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 transition-colors">
-          Hakkımızda
+          Hakkımda
         </Link>
       </nav>
     </header>
