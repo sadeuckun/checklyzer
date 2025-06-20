@@ -5,7 +5,7 @@ import { getBrandName } from '../lib/getBrandName';
 const brandName = getBrandName();
 
 function getSpeedScore(result) {
-  // Mobil ve masaüstü skorlarının ortalamasını al
+  // Take average of mobile and desktop scores
   if (!result) return 0;
   return Math.round(((result.mobileScore || 0) + (result.desktopScore || 0)) / 2);
 }

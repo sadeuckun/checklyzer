@@ -6,7 +6,7 @@ function getMobileScore(result) {
   let score = 100;
   if (!result.mobileFriendly) score -= 50;
   if (result.wordCount && result.wordCount < 300) score -= 10;
-  // Diğer mobil kriterler eklenebilir
+  // Other mobile criteria can be added
   return Math.max(score, 0);
 }
 

@@ -16,7 +16,7 @@ async function checkLink(url, signal) {
 }
 
 export default async function handler(req, res) {
-  if (!(await apiGuard(req, res, { timeoutMs: 20000, limit: 3 }))) return;
+  if (!(await apiGuard(req, res, { timeoutMs: 20000, limit: 50 }))) return;
   const { url } = req.query;
   if (!url) return res.status(400).json({ error: 'URL gerekli.' });
   try {
@@ -33,7 +33,7 @@ export default async function handler(req, res) {
         } catch {}
       }
     });
-    const links = Array.from(linksSet).slice(0, 30); // ilk 30 link ile sınırla
+    const links = Array.from(linksSet).slice(0, 30); // limit to first 30 links
     const results = await Promise.all(
       links.map(async l => ({ url: l, status: await checkLink(l, req.abortController.signal) }))
     );

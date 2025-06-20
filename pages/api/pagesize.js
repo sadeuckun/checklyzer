@@ -21,12 +21,12 @@ export default async function handler(req, res) {
   const { url } = req.query;
   if (!url) return res.status(400).json({ error: 'URL gerekli.' });
   try {
-    // Ana sayfa boyutu
+    // Main page size
     const response = await fetchFn(url, { signal: req.abortController.signal });
     const html = await response.text();
     const mainSize = response.headers.get('content-length') ? parseInt(response.headers.get('content-length'), 10) : Buffer.byteLength(html);
     const $ = cheerio.load(html);
-    // Asset linklerini topla
+    // Collect asset links
     const images = [];
     const scripts = [];
     const styles = [];
@@ -39,7 +39,7 @@ export default async function handler(req, res) {
     $('link[rel="stylesheet"][href]').each((i, el) => {
       try { styles.push(new URL($(el).attr('href'), url).href); } catch {}
     });
-    // Asset boyutlarını topla (ilk 20 asset ile sınırla, timeout riskine karşı)
+    // Collect asset sizes (limit to first 20 assets to avoid timeout risk)
     const imagesSize = (await Promise.all(images.slice(0, 20).map(src => getAssetSize(src, req.abortController.signal)))).reduce((a, b) => a + b, 0);
     const jsSize = (await Promise.all(scripts.slice(0, 20).map(src => getAssetSize(src, req.abortController.signal)))).reduce((a, b) => a + b, 0);
     const cssSize = (await Promise.all(styles.slice(0, 20).map(src => getAssetSize(src, req.abortController.signal)))).reduce((a, b) => a + b, 0);
